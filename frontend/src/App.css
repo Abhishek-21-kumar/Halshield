@@ -1,0 +1,9 @@
+/* ═══════════════════════════════════════════════════════════
+   HalShield — App Overrides (minimal, most styling via Tailwind)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Ensure all links don't have default underline */
+a { text-decoration: none; }
+
+/* Custom font-mono for JetBrains Mono */
+.font-mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
