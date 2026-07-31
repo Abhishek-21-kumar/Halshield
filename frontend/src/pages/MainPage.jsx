@@ -467,6 +467,14 @@ export default function MainPage() {
 
                 </div>
 
+                {/* Error Banner */}
+                {error && (
+                  <div className="p-3 rounded-none bg-red-500/10 border border-red-500/40 text-red-400 text-xs flex items-center gap-2 mt-4 font-mono">
+                    <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
+                    <span>{error}</span>
+                  </div>
+                )}
+
                 {/* Analyze button at card bottom */}
                 <div className="border-t border-border pt-4 mt-5">
                   <motion.button
