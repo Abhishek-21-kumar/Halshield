@@ -109,7 +109,7 @@
 
 ## 8. Deployment
 
-**GitHub:** 🟢 **PASS** (All fixes staged and committed to local `main` branch with commit message `deploy: prepare HalShield for production`)  
+**GitHub:** 🟢 **PASS** (Commit `668d273` successfully pushed to `origin/main` on [GitHub](https://github.com/Abhishek-21-kumar/Halshield))  
 **Render:** 🟡 **MANUAL ACTION REQUIRED** (Connect repository on Render Dashboard as Docker Web Service with >=2 GB RAM)  
 **Vercel:** 🟡 **MANUAL ACTION REQUIRED** (Connect repository on Vercel Dashboard with `VITE_API_BASE_URL`)
 
