@@ -7,3 +7,7 @@ __pycache__/
 *.log
 node_modules/
 frontend/node_modules/
+backend/uploads/*
+!backend/uploads/.gitkeep
+.pytest_cache/
+.coverage

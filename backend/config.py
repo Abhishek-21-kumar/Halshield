@@ -3,6 +3,8 @@ HalShield — Configuration management.
 Loads from .env with sensible defaults for all services.
 """
 import os
+import json
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
@@ -13,6 +15,7 @@ class Settings(BaseSettings):
     # ─── Server ────────────────────────────────────────────
     HOST: str = "0.0.0.0"
     PORT: int = 8000
+    FRONTEND_URL: str = ""
     CORS_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://localhost:5174",
@@ -20,6 +23,18 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://localhost:3001",
     ]
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, v):
+        if isinstance(v, str):
+            if v.startswith("[") and v.endswith("]"):
+                try:
+                    return json.loads(v)
+                except Exception:
+                    pass
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
 
     # ─── JWT Authentication ────────────────────────────────
     JWT_SECRET_KEY: str = "halshield-super-secret-change-in-production-2024"
@@ -67,6 +82,9 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+if settings.FRONTEND_URL and settings.FRONTEND_URL not in settings.CORS_ORIGINS:
+    settings.CORS_ORIGINS.append(settings.FRONTEND_URL.rstrip("/"))
 
 # Ensure directories exist
 os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
